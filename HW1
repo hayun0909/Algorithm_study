@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <stdlib.h> //malloc
+
+typedef struct _TreeNode{
+    char value;
+    struct _TreeNode* leftchild;
+    struct _TreeNode* rightchild;
+}TreeNode
+
+typedef struct QNode{
+    TreeNode* data;
+    struct QNode* link;
+}QNode;
+
+TreeNode *HeadNode; //트리 구조체를 가리키는 HeadNode 구조체 포인터 선언
+QNode* front=NULL;
+QNode* rear=NULL;
+
+//함수 선언부
+//void input_data();
+void searchNode();
+void treeInOrder();
+
+int main(){
+    int n;
+    printf("이진트리의 노드 개수와 각 노드와 왼쪽 자식 노드, 오른쪽 자식노드를 입력하시오.\n");
+    scanf("%d",&n);
+    getchar();
+    for(int i=0;i<n;i++){
+        char parent, leftchild, rightchild;
+        scanf("%c %c %c",&parent,&leftchild,&rightchild);
+        getchar();
+        make_tree(parent,leftchild,rightchild);
+        add_child()
+    }
+}
+
+//함수 구현부
+/*void input_value(){
+    scanf("%d",&n);
+    getchar();
+    for(int i=0;i<n;i++){
+        char parent, leftchild, rightchild;
+        scanf("%c %c %c",&parent,&leftchild,&rightchild);
+        getchar();
+
+    }
+}*/
+
+void make_tree(char parent,char leftchild,char rightchild){
+    TreeNode *NewNode;
+    NewNode=(TreeNode*)malloc(sizeof(TreeNode));
+    HeadNode=NewNode;
+    HeadNode->value=parent;
+    if(leftchild=='.'){
+        Newnode->leftchild=NULL;
+    }
+    else if(rightchild=='.'){
+        NewNode->rightchild=NULL;
+    }
+}
+
+int is_empty(){
+    return front==NULL;
+}
+
+void enqueue(TreeNode* tNode){
+    QNode* q=(QNode*)malloc(sizeof(QNode));
+    q->data=tNode;
+    q->link=NULL;
+    if(is_empty()){
+        front=rear=p;
+    }
+    else{
+        rear->link=q;
+        rear=q;
+    }
+}
+
+TreeNode* dequeue(){
+    QNode* q;
+    TreeNode* t;
+    if(is_empty()){
+        printf("큐 공백 에러");
+    }
+    q=front;
+    front=front->link;
+    if(front===NULL){
+        rear=NULL;
+    }
+    t=q->data;
+    free(q);
+    return t;
+}
+
+void searchNode(){
+
+}
+
+void treeInOrder(TreeNode* Node){
+    if(Node==NULL){
+        return;
+    }
+    treeInOrder(Node->leftchild);
+    printf("%c",Node->value);
+    treeInOrder(Node->rightchild);
+}
